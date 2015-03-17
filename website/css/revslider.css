@@ -1,0 +1,238 @@
+/*-----------------------------------------------------------------------------
+
+	-	Revolution Slider 1.5.3 -
+
+		Screen Stylesheet
+
+version:   	2.1
+date:      	09/18/11
+last update: 06.12.2012
+author:		themepunch
+email:     	info@themepunch.com
+website:   	http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+
+/*********************************************************************************************
+	-	SET THE SCREEN SIZES FOR THE BANNER IF YOU WISH TO MAKE THE BANNER RESOPONSIVE 	-
+**********************************************************************************************/
+
+/*	-	THE BANNER CONTAINER (Padding, Shadow, Border etc. )	-	*/
+
+#slider-home {
+	background: #fff url(../images/slider/revslider/slides/slider-bg-repeatable.png) repeat-x left top;
+}
+
+.bannercontainer {
+	padding:0px;
+	width:100% !important;
+	position:relative;
+	max-width: 100% !important;
+	max-height:430px !important;
+	overflow:hidden;
+}
+
+.banner {
+	position:relative;
+	overflow:hidden;
+	width:100%;
+	height:100%;
+}
+
+/*************************
+	-	CAPTIONS	-
+**************************/
+
+.tp-hide-revslider,.tp-caption.tp-hidden-caption	{	visibility:hidden !important; display:none !important;}
+
+.tp-caption {
+	position: absolute;
+	white-space: normal !important;
+}
+
+.tp-caption h2 {
+	font-family: 'TitilliumText25L400wt', sans-serif;
+	font-size: 2.166em; /* 26px */
+	font-weight: normal;	
+	line-height: 1.23em; /* 32px/26px */
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.tp-caption p {
+	font-size: 1.083em; /* 13px */
+	line-height: 1.461em; /* 19px/13px */
+	margin: 0;
+}
+
+/* Colors */
+
+.tp-caption.black {
+	color: #fff;
+	text-shadow: 0 -1px rgba(0, 0, 0, 0.75);
+	border-radius: 2px;
+	background: rgba(0,0,0,0.75);
+	padding: 7px 15px;
+}
+
+/* Caption Button */
+
+.tp-caption .button {
+	margin: 0;
+	font-size: 1.083em; /* 13px */
+	padding: 0.583em 1.25em; /* 7px 15px /12px */
+}
+
+.tp-caption .button:hover {
+	background-color: #666;
+}
+			
+.tp_inner_padding	{	
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	max-height:none !important;	
+}
+
+/****************************************************************
+
+	-	SET THE ANIMATION EVEN MORE SMOOTHER ON ANDROID   -
+
+******************************************************************/
+
+.tp-simpleresponsive .slotholder *,
+.tp-simpleresponsive img			{ -webkit-transform: translateZ(0);
+										  -webkit-backface-visibility: hidden;
+										  -webkit-perspective: 1000;
+									}
+
+/************************************************
+	  - SOME CAPTION MODIFICATION AT START  -
+*************************************************/
+.tp-simpleresponsive .caption,
+.tp-simpleresponsive .tp-caption {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";	-moz-opacity: 0;	-khtml-opacity: 0;	opacity: 0; position:absolute; visibility: hidden;
+
+}
+
+.tp-simpleresponsive img	{	max-width:none;}
+
+/******************************
+	-	IE8 HACKS	-
+*******************************/
+.noFilterClass {
+	filter:none !important;
+}
+
+/********************************
+	-	FULLSCREEN VIDEO	-
+*********************************/
+.caption.fullscreenvideo {	left:0px; top:0px; position:absolute;width:100%;height:100%;}
+.caption.fullscreenvideo iframe	{ width:100% !important; height:100% !important;}
+
+.tp-caption.fullscreenvideo {	left:0px; top:0px; position:absolute;width:100%;height:100%;}
+.tp-caption.fullscreenvideo iframe	{ width:100% !important; height:100% !important;}
+
+/************************************
+		-	TP BANNER TIMER		-
+*************************************/
+.tp-bannertimer								{	width:100%; height:10px; background: url(../images/slider/revslider/assets/timer.png);position:absolute; z-index:200;}
+.tp-bannertimer.tp-bottom					{	bottom:0px !important;height:5px;}
+
+/************************
+	-	NAVIGATION	-
+*************************/
+
+/** BULLETS **/
+.tp-bullets {	
+	position: absolute; 
+	bottom: 20px;
+	overflow: hidden;
+	z-index: 100; 
+}
+
+.boxed .tp-bullets {
+	left: 40px !important;
+}
+
+.tp-bullets .bullet {
+	margin-right: 6px;
+	float: left;	
+	width: 10px; 
+	height: 10px; 
+	display: block; 
+	background: url(../images/slider/nav.png) no-repeat left -11px;
+	cursor: pointer; 
+	text-indent: -999em;
+}
+
+.tp-bullets .bullet:hover, .tp-bullets .bullet.selected {
+	background-position: left top;
+}
+
+.tp-bullets .bullet.selected {
+	cursor: default;
+}
+
+/*************************************
+	-	TP ARROWS 	-
+**************************************/
+
+.tp-leftarrow, .tp-rightarrow {	
+	position: absolute;
+	top: 50%;
+	margin-top: -68px; /* half the height */
+	display: block;
+	width: 30px; 
+	height: 136px; 
+	background-image: url(../images/slider/arrows.png);
+	background-repeat: no-repeat;
+	cursor: pointer; 
+	text-indent: -999em;
+	z-index: 100; 
+}
+
+.tp-leftarrow {
+	background-position: 10px center;
+	left: 0;
+}
+
+.tp-rightarrow {
+	background-position: -18px center; 
+	right: 0;
+}
+
+/*********************************************
+
+	-	BASIC SETTINGS FOR THE BANNER	-
+
+***********************************************/
+
+.tp-simpleresponsive img {
+		-moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -o-user-select: none;
+}
+
+.tp-simpleresponsive ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+
+.tp-simpleresponsive > ul > li{
+	list-stye:none;
+	position:absolute;
+	visibility:hidden;
+}
+
+/*  CAPTION SLIDELINK   **/
+.caption.slidelink a div,
+.tp-caption.slidelink a div {	width:10000px; height:10000px;  background: url(../images/slider/revslider/assets/coloredbg.png) repeat;}
+
+.tp-loader 	{	background:url(../images/slider/revslider/assets/loader.gif) no-repeat 10px 10px; background-color:#fff;  margin:-22px -22px; top:50%; left:50%; z-index:10000; position:absolute;width:44px;height:44px;
+				border-radius: 3px;
+				-moz-border-radius: 3px;
+				-webkit-border-radius: 3px;
+			}

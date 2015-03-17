@@ -1,0 +1,228 @@
+/*
+ * jQuery FlexSlider v2.0
+ * http://www.woothemes.com/flexslider/
+ *
+ * Copyright 2012 WooThemes
+ * Free to use under the GPLv2 license.
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Contributing author: Tyler Smith (@mbmufffin)
+ */
+
+/* Browser Resets */
+.flex-container a:active,
+.flexslider a:active,
+.flex-container a:focus,
+.flexslider a:focus  {outline: none;}
+.slides,
+.flex-control-nav,
+.flex-direction-nav {margin: 0; padding: 0; list-style: none;}
+
+/* FlexSlider Necessary Styles
+*********************************/
+.flexslider {margin: 0; padding: 0;}
+.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.flexslider .slides img {width: 100%; display: block;}
+.flex-pauseplay span {text-transform: capitalize;}
+
+/* Clearfix for the .slides element */
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
+* html .slides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .slides > li:first-child {display: block;}
+
+/* FlexSlider 
+*********************************/
+.flexslider {
+	background: #fff; 
+	position: relative; 
+	zoom: 1;
+}
+
+.flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
+
+.loading .flex-viewport {max-height: 300px;}
+
+.flexslider .slides {
+	zoom: 1;
+}
+
+.flex-viewport .slides > li {
+	position: relative;
+}
+
+.flex-viewport .slides > li > img,
+.flex-viewport .slides > li > iframe {
+    max-width: 100%;
+}
+
+.flex-viewport .slides > li > a,
+.flexslider .slides > li > a {
+	display: block;	
+}
+
+.flexslider .button {
+	margin-bottom: 0;	
+}
+
+/* Suggested container for "Slide" animation setups. Can replace this with your own, if you wish */
+
+.flex-container {
+	zoom: 1; 
+	position: relative;
+}
+
+/* Caption style */
+
+.flex-caption {
+	width: 56.382%; /* 530px/940px */
+	min-width: 530px;
+	max-height: 300px;
+	position: absolute;
+	left: 40px;
+	bottom: 132px;
+	color: #fff;
+	text-shadow: 0 -1px rgba(0, 0, 0, 0.75);
+}
+
+.flex-caption h2, .flex-caption > div {
+	background: rgba(0,0,0,0.75);
+	border-radius: 2px;
+}
+
+.flex-caption > div {
+	padding: 15px 20px;
+}
+
+.flex-caption h2 {
+	font-family: 'TitilliumText25L400wt', sans-serif;
+	font-size: 2.166em; /* 26px */
+	font-weight: normal;	
+	line-height: 1.23em; /* 32px/26px */
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	padding: 13px 20px;
+}
+
+.flex-caption p {
+	font-size: 1.083em; /* 13px */
+	line-height: 1.461em; /* 19px/13px */
+}
+
+.flex-caption p:last-child {
+	margin-bottom: 0;
+}
+
+.flex-caption .button {
+	float: right;
+	margin: 0 0 0 20px;
+	font-size: 1.083em; /* 13px */
+}
+
+.flex-caption .button:hover {
+	background-color: #666;
+}
+
+/* Direction Nav */
+
+#flexslider-home .flex-direction-nav {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s ease-in-out;
+	-moz-transition: opacity 0.2s ease-in-out;
+	-ms-transition: opacity 0.2s ease-in-out;
+	-o-transition: opacity 0.2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;	
+}
+
+#flexslider-home.flex-container:hover .flex-direction-nav {
+	opacity: 1;
+}
+
+.flex-direction-nav a {
+	position: absolute;
+	top: 50%;
+	margin-top: -68px; /* half the height */
+	display: block;
+	width: 30px; 
+	height: 136px; 
+	background-image: url(../images/slider/arrows.png);
+	background-repeat: no-repeat;
+	cursor: pointer; 
+	text-indent: -999em;
+	z-index: 2; /* necessary when there is an overlay */
+}
+
+.flex-direction-nav a.flex-prev,
+.flex-direction-nav a.flex-prev.flex-disabled {
+	background-position: 10px center;
+	left: 0;
+}
+
+.flex-direction-nav a.flex-next,
+.flex-direction-nav a.flex-next.flex-disabled {
+	background-position: -18px center; 
+	right: 0;
+}
+
+.flex-direction-nav a.flex-disabled:link, .flex-direction-nav a.flex-disabled:visited, 
+.flex-direction-nav a.flex-disabled:hover, .flex-direction-nav a.flex-disabled:active {
+	background-color: rgba(0,0,0,0.6);
+	cursor: default;
+}
+
+/* Control Nav */
+
+.flex-control-nav {
+	position: absolute; 
+	left: 40px;
+	bottom: 20px;
+	overflow: hidden;
+	z-index: 2; /* necessary when there is an overlay */
+}
+
+.entry-slider .flex-control-nav {
+	bottom: 15px;
+}
+
+.flex-control-nav li {
+	margin-right: 6px;
+	float: left;
+}
+
+.flex-control-paging a {
+	width: 10px; 
+	height: 10px; 
+	display: block; 
+	background: url(../images/slider/nav.png) no-repeat left -11px;
+	cursor: pointer; 
+	text-indent: -999em;
+}
+
+.flex-control-paging a:hover, .flex-control-paging a.flex-active {
+	background-position: left top;
+}
+
+.flex-control-paging a.flex-active {
+	cursor: default;
+}
+
+/* Video */
+
+.flexslider iframe {
+	margin: 0 auto;	
+}
+
+.flexslider {
+	background-color: #f0f0f0; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f2f2f2 0%, #eeeeee 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f2f2), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f2f2f2 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f2f2f2 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f2f2f2 0%,#eeeeee 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #f2f2f2 0%,#eeeeee 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+}

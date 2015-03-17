@@ -1,0 +1,571 @@
+
+/* CSS Document */
+
+
+/* ---------------------------------------------------------------------- */
+/* Theme Information
+/* ----------------------------------------------------------------------
+Name: Exquiso
+Description: Responsive Multi-Purpose Theme
+Version: 1.0
+Author: Ixtendo
+Author URI: http://www.ixtendo.com
+------------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------- */
+/* Exquiso Shortcode Styles
+/* ----------------------------------------------------------------------
+TABLE OF CONTENTS
+
+-Buttons
+-Blockquotes
+-Lists
+-Notification Boxes
+-Tabs
+-Toggle & Accordion
+-Dropcaps
+-Highlights
+-Preformatted Text & Computer Code
+-Infobox
+-Images
+-White Space
+------------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------- */
+/* Buttons
+/* ---------------------------------------------------------------------- */
+.button, .content-form input.button, #comment-form #submit {
+	width: auto;
+	display: inline-block;	
+	cursor: pointer;
+	line-height: normal;
+	font-weight: bold;
+	margin: 0 10px 20px 0;
+	border: none; 
+	border-radius: 2px;
+	color: #fff !important;
+	padding: 7px 15px;
+	text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
+	
+	background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+	background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+	background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+	background-image: linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+	background-repeat: repeat-x;
+}
+
+.button.large {
+	font-size: 1.166em; /* 14px */
+	padding: 10px 20px;
+}
+
+.button.generic {
+	background-color: #e0e0e0; 
+	border: 1px solid #ccc;
+	text-shadow: 0 1px rgba(255,255,255,0.5);
+	color: #333 !important;
+	box-shadow: 0 1px rgba(255,255,255,0.5) inset;
+	
+	background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+	background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+	background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+	background-image: linear-gradient(top, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+	background-repeat: repeat-x;
+}
+
+.button.generic:hover {
+	background-color: #ebebeb;
+}
+
+/* begin colors */
+
+.button.orange {
+	background-color: #f78e0c;	
+}
+
+.button.yellow {
+	background-color: #FBB829;	
+}
+
+.button.green {
+	background-color: #7FAF1B;	
+}
+
+.button.retro-green {
+	background-color: #6d8d5b;	
+}
+
+.button.teal {
+	background-color: #4fa29a;	
+}
+
+.button.blue {
+	background-color: #4d70b1;	
+}
+
+.button.blue-2 {
+	background-color: #2A8FBD;	
+}
+
+.button.red {
+	background-color: #E64141;	
+}
+
+.button.pink {
+	background-color: #bd2346;	
+}
+
+.button.purple {
+	background-color: #723f8e;	
+}
+
+.button.black {
+	 background-color: #333;
+}
+
+/* end colors */
+
+.button:hover, .content-form input.button:hover, #comment-form #submit:hover {
+	background-color: #333;		
+}
+
+/* ---------------------------------------------------------------------- */
+/* Blockquotes
+/* ---------------------------------------------------------------------- */
+blockquote {
+	margin-bottom: 20px;
+}
+
+.quote-content {
+	font-style: italic;
+    color: #666;
+}
+
+.quote-content p {
+	margin-top: 20px;	
+	margin-bottom: 0;
+}
+
+.quote-content > p:first-child {
+	margin: 0;	
+}
+
+/* Simple */
+
+blockquote.simple {
+	padding-left: 10px;
+	border-left: 2px solid #e0e0e0;
+}
+
+blockquote.simple .quote-meta {
+	margin-top: 10px;
+}
+
+/* Speech Bubble */
+
+blockquote.speech-bubble .quote-content {
+	position: relative;
+	padding: 20px;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #e0e0e0;	
+}
+
+blockquote.speech-bubble span.quote-arrow {
+	display: block;
+	width: 18px;
+	height: 21px;
+	background: url(../images/testimonial-arrow.png) no-repeat left top;
+	position: absolute;
+	right: 53.333%; /* 160px */
+	bottom: -21px;	
+}
+
+blockquote.speech-bubble .quote-meta {
+	text-align: right;
+	margin-top: 25px;
+}
+
+blockquote.speech-bubble .company {
+	color: #666;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Lists
+/* ---------------------------------------------------------------------- */
+ul.arrow,
+ul.circle,
+ul.square,
+ul.check,
+ol.decimal,
+ol.upper-roman, 
+ol.lower-alpha, 
+ol.upper-alpha {
+	margin-bottom: 20px;
+}
+
+ul.arrow ul, 
+ul.circle ul,
+ul.square ul,
+ul.check ul,
+ol.decimal ul,
+ol.upper-roman ul,
+ol.lower-alpha ul,
+ol.upper-alpha ul {
+	margin-left: 14px;	
+}
+
+ul.arrow ol, 
+ul.circle ol,
+ul.square ol,
+ul.check ol,
+ol.decimal, ol.decimal ol,
+ol.upper-roman, ol.upper-roman ol,
+ol.lower-alpha, ol.lower-alpha ol,
+ol.upper-alpha, ol.upper-alpha ol {
+	margin-left: 18px; 	
+}
+
+ul.arrow li,
+ul.circle li,
+ul.square li,
+ul.check li,
+ol.decimal li,
+ol.upper-roman li, 
+ol.lower-alpha li, 
+ol.upper-alpha li {
+	margin-bottom: 5px;
+}
+
+ul.arrow ul li:first-child, ul.arrow ol li:first-child,
+ul.circle ul li:first-child, ul.circle ol li:first-child,
+ul.square ul li:first-child, ul.square ol li:first-child, 
+ul.check ul li:first-child, ul.check ol li:first-child,
+ol.decimal ol li:first-child, ol.decimal ul li:first-child,
+ol.upper-roman ol li:first-child, ol.upper-roman ul li:first-child, 
+ol.lower-alpha ol li:first-child, ol.lower-alpha ul li:first-child, 
+ol.upper-alpha ol li:first-child, ol.upper-alpha ul li:first-child {
+	margin-top: 5px;
+}
+
+/* Unordered Lists */
+
+ul.arrow li {
+	background: url(../images/bullets/list-arrow.png) no-repeat left 0.5em; /* 6px */
+	padding-left: 11px;	
+}
+
+ul.circle li {
+	background: url(../images/bullets/list-circle.png) no-repeat left 0.583em; /* 7px */
+	padding-left: 11px;	
+}
+
+ul.square li {
+	background: url(../images/bullets/list-square.png) no-repeat left 0.583em; /* 7px */
+	padding-left: 11px;	
+}
+
+ul.check li {
+	background: url(../images/bullets/list-check.png) no-repeat left 0.416em; /* 5px */
+	padding-left: 17px;	
+}
+
+/* Ordered Lists */
+
+ol.decimal {
+	list-style: decimal;	
+}
+
+ol.upper-roman {
+	list-style: upper-roman;	
+}
+
+ol.lower-alpha {
+	list-style: lower-alpha;	
+}
+
+ol.upper-alpha {
+	list-style: upper-alpha;	
+}
+
+/* ---------------------------------------------------------------------- */
+/* Notification Boxes
+/* ---------------------------------------------------------------------- */
+.notification-box {
+	position: relative;
+	margin-bottom: 20px;
+	padding: 10px 24px 10px 36px;
+	background: no-repeat 10px center;
+	border: 1px solid;
+}
+
+a.notification-close {
+	display: block;
+	position: absolute;
+	right: 10px;
+	top: 10px;	
+	color: #666 !important;
+	font-weight: bold;
+	font-size: 1.166em; /* 14px */
+	line-height: normal;
+}
+
+.notification-box p {
+	margin-bottom: 0;
+	margin-top: 20px;
+}
+
+.notification-box > p:first-child {
+	margin: 0;	
+}
+
+.notification-box-info {
+	background-color: #d7ebf5;
+	background-image: url(../images/info-16.png);
+	border-color: #99c7de; 	
+}
+
+.notification-box-success {
+	background-color: #e1ebc5;
+	background-image: url(../images/tick-16.png);
+	border-color: #bfd188; 	
+}
+
+.notification-box-warning {
+	background-color: #fcf3d7;
+	background-image: url(../images/warning-16.png);
+	border-color: #f5d77d; 	
+}
+
+.notification-box-error {
+	background-color: #faede6;
+	background-image: url(../images/block-16.png);
+	border-color: #f5ccb8; 	
+}
+
+/* ---------------------------------------------------------------------- */
+/* Tabs
+/* ---------------------------------------------------------------------- */
+.tabs {
+	margin-bottom: 20px;
+}
+
+.ui-tabs .ui-tabs-hide { 
+	position: absolute;
+    left: -10000em;
+}
+
+.tabs ul.nav li {
+    float: left;
+	margin: 0 2px -1px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.tabs ul.nav li a {
+    display: block;
+	padding: 5px 10px;
+	color: #333;
+	background-color: #f5f5f5;
+	border: 1px solid #e0e0e0;
+	border-bottom: none;
+}
+
+.tabs ul.nav li a:hover {
+	background-color: #f0f0f0;
+}
+
+.tabs ul.nav li.ui-state-active a {
+    background-color: #fff;
+	padding-bottom: 6px; /* makes the unselected tabs appear above the border */
+	border-left-color: #e0e0e0 !important;
+	border-right-color: #e0e0e0 !important;
+}
+
+.tabs .tab {
+    padding: 15px 10px;
+    background-color: #fff;
+	border: 1px solid #e0e0e0;
+}
+
+.tabs .tab > *:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Toggle & Accordion
+/* ---------------------------------------------------------------------- */
+.toggle:last-child, .accordion {
+	margin-bottom: 20px;	
+}
+
+.toggle {
+	margin-top: -1px;	
+}
+
+.toggle:first-child {
+	margin-top: 0;	
+}
+
+span.toggle-title, span.accordion-title {
+	display: block;
+	position: relative; /* sets the initial position for the icon */
+	padding: 10px 10px 10px 40px;
+	cursor: pointer;
+	background-color: #f5f5f5;
+	border: 1px solid #e0e0e0;
+}
+
+span.accordion-title {
+	border-top: none;	
+}
+
+.accordion > div:first-child > span.accordion-title {
+	border-top: 1px solid #e0e0e0;	
+}
+
+.toggle-inner, .accordion-inner {
+    padding: 15px 10px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-top: none;
+}
+
+.toggle .ui-icon, .accordion .ui-icon {
+	position: absolute;
+	top: 9px;
+	left: 10px;
+	background: url(../images/toggle-plus.png) no-repeat left top;
+	width: 20px;
+	height: 20px;
+}
+
+.toggle .ui-state-active .ui-icon, .accordion .ui-state-active .ui-icon {
+	background-image: url(../images/toggle-minus.png);
+}
+
+.toggle-inner > *:last-child, .accordion-inner > *:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Dropcaps
+/* ---------------------------------------------------------------------- */
+.dropcap {
+	float: left;
+	font-weight: bold;
+	line-height: 1em;
+	text-transform: uppercase;
+	margin-right: 5px;
+}
+
+.dropcap.simple {
+	font-size: 2.5em; /* 30px */
+}
+
+.dropcap.with-bg {
+	font-size: 2em; /* 24px */
+    padding: 6px 10px;
+	background-color: #EBEBEB;
+	border-radius: 2px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Highlights
+/* ---------------------------------------------------------------------- */
+.highlight {
+	color: #fff;
+    padding: 2px;
+}
+
+.highlight.black {
+	background-color: #333;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Preformatted Text & Computer Code
+/* ---------------------------------------------------------------------- */
+pre, code {
+    font-family: 'Courier New', Courier, monospace;
+	color: #888;
+}
+
+pre {
+	background-color: #fff;
+	border-left: 2px solid #e0e0e0;
+    padding: 10px;
+	margin-bottom: 20px;
+	white-space: pre-wrap;
+    word-wrap: break-word;	
+}
+
+/* ---------------------------------------------------------------------- */
+/* Infobox
+/* ---------------------------------------------------------------------- */
+.infobox {
+	border-left: 4px solid;
+}
+
+.infobox-inner {
+	background-color: #f5f5f5;
+	border: 1px solid #e0e0e0;
+	border-left: none;
+	padding: 15px 20px;
+	margin-bottom: 20px;
+}
+
+.infobox h2 {
+	margin-bottom: 5px;
+}
+
+.infobox div.with-button {
+	display: inline;	
+}
+
+.infobox .button {
+	float: right;
+	margin: 0 0 0 20px;
+}
+
+.infobox .mobile-button {
+	display: none;
+}
+
+.infobox p:last-child {
+	margin-bottom: 0;	
+}
+
+/* ---------------------------------------------------------------------- */
+/* Images
+/* ---------------------------------------------------------------------- */
+.entry-image.float-left,
+.float-left.caption {
+    margin: 5px 20px 15px 0;
+}
+
+.entry-image.float-right,
+.float-right.caption {
+    margin: 5px 0 15px 20px;
+}
+
+.caption .entry-image {
+    margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* White Space
+/* ---------------------------------------------------------------------- */
+.space20 {
+	height: 20px;	
+}
+
+.space40 {
+	height: 40px;	
+}
+
+.indent {
+	margin-left: 30px !important;	
+}

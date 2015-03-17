@@ -1,0 +1,302 @@
+#!/usr/bin/python
+
+import os, sys
+import pickle
+import ConfigParser
+import pprint
+import xmlrpclib
+import base64
+import bz2
+import socket
+
+# globals
+exclude_list = []
+
+class HostConfig(object):
+    """Holder for config info from the configuration file"""
+    def __init__(self):
+        self.config = { 'version' : 0,
+                        'global': {},
+                        'site': {},
+                        'host': {},
+                        'stats': {},
+                        }
+
+_translation = [chr(_x) for _x in range(256)]
+def _translate(s, altchars):
+    translation = _translation[:]
+    for k, v in altchars.items():
+        translation[ord(k)] = v
+    return s.translate(''.join(translation))
+
+def urlsafe_b64encode(s):
+   import binascii
+   altchars = '-_'
+   encoded = binascii.b2a_base64(s)[:-1]
+   if altchars is not None:
+      return _translate(encoded, {'+': altchars[0], '/': altchars[1]})
+   return encoded
+
+def get_exclude_dir_patterns_from_file(options):
+    global exclude_list
+    if options.exclude_from:
+        f = open(options.exclude_from, 'r')
+        for line in f:
+            line = line.strip()
+            if line.startswith(u'#'): continue
+            exclude_list.append(line)
+        f.close()
+
+import copy
+def exclude_dirs(root, dirs):
+    global exclude_list
+    copydirs = copy.copy(dirs)
+    # iterate over the copy so we can modify the original
+    for d in copydirs:
+        testdir = os.path.join(root, d, '') #keep trailing /, we know it's a directory
+        for pattern in exclude_list:
+            if pattern in testdir:
+		dirs.remove(d)
+		break
+
+def gen_dirtree(path):
+    # structure here is:
+    # dirtree is a dict
+    # {
+    #   dirpath :
+    #                {
+    #                   filename1 : size1,
+    #                   filename2 : size2,
+    #                   ...
+    #                 },
+    #   ...
+    # }
+    # 
+    # 2009-03-09: MM's web app ignores the statfiles dict.  So don't bother generating it.
+
+    dirtree = {}
+    for dirpath, dirnames, filenames in os.walk(path):
+        exclude_dirs(dirpath, dirnames)
+        statfiles = {}
+        if path.endswith('/'):
+            short_path = dirpath[len(path):]
+        else:
+            short_path = dirpath[len(path)+1:]
+        if len(short_path) > 0:
+            dirtree[short_path] = statfiles
+        else:
+            dirtree[''] = statfiles
+
+    return dirtree
+
+def errorprint(error):
+    sys.stderr.write(error+'\n')
+
+class MissingOption(Exception):
+    pass
+
+def check_required_options(conf, section, required_options):
+    for o in required_options:
+        if not conf.has_option(section, o):
+            errorprint('missing required option %s in config [%s]' % (o, section))
+            raise MissingOption()
+    return True
+
+def parse_value(value):
+    """Split multi-line values into a list"""
+    if value.find('\n') > -1:
+        return value.split()
+    return value
+
+def parse_section(conf, section, item, required_options, optional_options=[]):
+    if conf.has_option(section, 'enabled'):
+        if conf.get(section, 'enabled') != '1' and section.lower() in item.config:
+            print 'removing disabled section %s' % (section)
+            del item.config[section.lower()]
+            return False
+
+    if not check_required_options(conf, section, required_options):
+        return False
+
+    if not section.lower() in item.config:
+        item.config[section.lower()] = {}
+
+    for o in required_options:
+        item.config[section.lower()][o] = parse_value(conf.get(section, o))
+    for o in optional_options:
+        if conf.has_option(section, o):
+            item.config[section.lower()][o] = parse_value(conf.get(section, o))
+
+    return True
+
+def parse_global(conf, section, item):
+    required_options = [ 'enabled', 'server' ]
+    if not parse_section(conf, section, item, required_options):
+        errorprint('missing required options (server AND enabled) in [%s] section' % (section))
+        return False
+    return True
+
+def parse_site(conf, section, item):
+    required_options = [ 'enabled', 'name', 'password' ]
+    return parse_section(conf, section, item, required_options)
+
+def parse_host(conf, section, item):
+    required_options = [ 'enabled', 'name' ]
+    optional_options = [ 'user_active' ]
+    return parse_section(conf, section, item, required_options, optional_options=optional_options)
+
+def get_stats(conf, section):
+    if conf.has_option(section, 'enabled'):
+        if conf.get(section, 'enabled') != '1':
+            return None
+    statsdata = {}
+    for name, value in conf.items(section):
+        if name == 'enabled':
+            continue
+        filenames = parse_value(conf.get(section, name))
+        if type(filenames) != list:
+            filenames = [ filenames ]
+        for fn in filenames:
+            try:
+                f = open(fn, 'r')
+                contents = contents + f.readlines()
+                statsdata[name] = pickle.dumps(contents, -1)
+                f.close()
+            except:
+                pass
+    return statsdata
+
+def parse_category(conf, section, item, crawl):
+    required_options = [ 'enabled', 'path' ]
+    if not parse_section(conf, section, item, required_options):
+        return False
+
+    if crawl:
+        dirtree = gen_dirtree(conf.get(section, 'path'))
+        item.config[section.lower()]['dirtree'] = dirtree
+    # database doesn't need to know the disk path
+    del item.config[section.lower()]['path']
+
+def config(cfg, item, crawl=True):
+    broken = False
+    conf = ConfigParser.ConfigParser()
+    files = conf.read(cfg)
+    if files == []:
+        errorprint('Configuration file %s not found' % (cfg))
+        return False
+    conf.read(cfg)
+
+    try:
+        # don't grab parse_stats here
+        for section, parsefunc in [ ('global', parse_global), ('site', parse_site),
+                                    ('host', parse_host)]:
+            if conf.has_section(section):
+                if not parsefunc(conf, section, item):
+                    return False
+            else:
+                errorprint('Invalid configuration - missing section [%s]' % (section))
+                sys.exit(1)
+
+        for section in conf.sections():
+            if section in [ 'global', 'site', 'host', 'stats']:
+                continue
+            parse_category(conf, section, item, crawl)
+
+    except MissingOption:
+        errorprint('Invalid configuration - Exiting')
+        sys.exit(1)
+
+    return True
+
+options=None
+
+def main():
+    from optparse import OptionParser
+    parser = OptionParser(usage= sys.argv[0] + " [options]")
+    parser.add_option("-c", "--config",
+                      dest="config",
+                      default='/etc/mirrormanager-client/report_mirror.conf',
+                      help='Configuration filename (required)')
+#    parser.add_option("-s", "--stats",
+#                      action="store_true",
+#                      dest="stats",
+#                      default=False,
+#                      help='Send stats')
+    parser.add_option("-i", "--input",
+                      dest="input",
+                      default=None,
+                      help="Input filename (for debugging)")
+    parser.add_option("-o", "--output",
+                      dest="output",
+                      default=None,
+                      help="Output filename (for debugging)")
+    parser.add_option("-n", "--no-send",
+                      action="store_true",
+                      dest="no_send",
+                      default=False,
+                      help="Don't send data to the server.")
+    parser.add_option("-d", "--debug",
+                      action="store_true",
+                      dest="debug",
+                      default=False,
+                      help='Enable debugging output')
+    parser.add_option("--exclude-from",
+                      dest="exclude_from",
+                      default=None,
+                      help='get exclude patterns from FILE')
+
+    (options, args) = parser.parse_args()
+    item = HostConfig()
+    get_exclude_dir_patterns_from_file(options)
+    if options.input:
+        infile = open(options.input, 'rb')
+        item.config = pickle.load(infile)
+        infile.close()
+        if not config(options.config, item, crawl=False):
+            sys.exit(1)
+    else:
+        if not config(options.config, item, crawl=True):
+            sys.exit(1)
+
+    p = pickle.dumps(item.config, -1)
+
+    if options.debug:
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(item.config)
+        
+    if options.output is not None:
+        outfile = open(options.output, 'wb')
+        outfile.write(p)
+        outfile.close()
+
+#    if options.stats:
+#        statdata = get_stats(conf, 'stats')
+
+    # upload p and statsdata here
+    if not item.config.has_key('global') or not item.config['global'].has_key('enabled') or item.config['global']['enabled'] != '1':
+        sys.exit(1)
+
+    if not options.no_send:
+        #   print "Connecting to %s" % item.config['global']['server']
+        server = xmlrpclib.ServerProxy(item.config['global']['server'])
+        data = None
+        try:
+            data = base64.urlsafe_b64encode(bz2.compress(p))
+        except AttributeError:
+            data = urlsafe_b64encode(bz2.compress(p))
+
+        if data is not None:
+            try:
+                print server.checkin(data)
+            except socket.error, m:
+                print "Error checking in: %s.  Please try again later." % (m[1])
+            except xmlrpclib.ProtocolError:
+                print "Error checking in: Service Temporarily Unavailable.  Please try again later."
+                sys.exit(1)                
+            except xmlrpclib.Fault:
+                print "Error checking in.  Connection closed before checkin complete.  Please try again later."
+                sys.exit(1)                
+
+
+if __name__ == '__main__':
+    main()
