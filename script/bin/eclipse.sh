@@ -23,16 +23,16 @@ RSYNC=/usr/bin/rsync
 LOCKFILE="/tmp/eclipse_lockfile"
 
 # if you rsync from master server, use these options
-RSYNC_HOST=download.eclipse.org
-RSYNC_PATH=eclipseMirror
+#RSYNC_HOST=download.eclipse.org
+#RSYNC_PATH=eclipseMirror
 
 # Alternate RSYNC.  Comment the master server options above
 #RSYNC_HOST=rsync.gtlib.gatech.edu
 #RSYNC_PATH=eclipse
 
 # Alternate RSYNC.  Comment the master server options above
-#RSYNC_HOST=rsync.osuosl.org
-#RSYNC_PATH=eclipse
+RSYNC_HOST=rsync.osuosl.org
+RSYNC_PATH=eclipse
 #RSYNC_HOST=mirrors.ustc.edu.cn
 #RSYNC_PATH=eclipse
 
@@ -111,7 +111,7 @@ $RSYNC -tlvp $RSYNC_HOST::$RSYNC_PATH/TIME $mirror_path
 
 
 if [ $full_eclipse == yes ]; then
-	$RSYNC -rtvp --delete $RSYNC_HOST::$RSYNC_PATH/* $mirror_path
+	$RSYNC -rtvp --ipv4 --delete $RSYNC_HOST::$RSYNC_PATH/* $mirror_path
 fi 
 
 if [ $full_platform == yes ] ; then

@@ -18,16 +18,16 @@ warn() {
 RSYNCSOURCE=rsync://rsync.releases.ubuntu.com/releases
 
 # Define where you want the mirror-data to be on your mirror
-BASEDIR=/data/mirrors/ubuntu-releases/
+BASEDIR=/data/mirrors/ubuntu-releases
 
 if [ ! -d ${BASEDIR} ]; then
   warn "${BASEDIR} does not exist yet, trying to create it..."
   mkdir -p ${BASEDIR} || fatal "Creation of ${BASEDIR} failed."
 fi
 
-rsync --verbose --recursive --times --links --hard-links \
+rsync --ipv4 --verbose --recursive --times --links --hard-links \
   --stats --delete-after \
   ${RSYNCSOURCE} ${BASEDIR} || fatal "Failed to rsync from ${RSYNCSOURCE}."
 
-date -u > ${BASEDIR}/.trace/$(hostname -f)
+date -u > ${BASEDIR}/.trace/${HOSTNAME}
 rm -f $LOCK

@@ -13,7 +13,7 @@ warn() {
   echo "$1"
 }
 SOURCE=rsync://dl.fedoraproject.org/fedora-epel
-rsync -vazH --numeric-ids  --delay-updates --delete-delay \
+rsync -vazH --ipv4 --numeric-ids  --delay-updates --delete-delay \
    $SOURCE /data/mirrors/epel
 
 /usr/local/bin/report_mirror > /dev/null

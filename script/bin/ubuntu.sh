@@ -26,13 +26,13 @@ if [ ! -d ${BASEDIR} ]; then
   mkdir -p ${BASEDIR} || fatal "Creation of ${BASEDIR} failed."
 fi
 
-rsync -v --recursive --times --links --hard-links \
+rsync -v --ipv4 --recursive --times --links --hard-links \
   --stats \
   --exclude "Packages*" --exclude "Sources*" \
   --exclude "Release*" \
   ${RSYNCSOURCE} ${BASEDIR} || fatal "First stage of sync failed."
 
-rsync --recursive --times --links --hard-links \
+rsync --recursive --ipv4 --times --links --hard-links \
   --stats --delete --delete-after \
   ${RSYNCSOURCE} ${BASEDIR} || fatal "Second stage of sync failed."
 

@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# forked from https://github.com/We-Neusoft/Scripts
 from string import rfind
 from time import mktime, strptime
 from os import makedirs, path, stat, utime

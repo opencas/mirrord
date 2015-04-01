@@ -7,7 +7,7 @@ from urllib import urlretrieve, urlopen
 from xml.etree import ElementTree
 import re
 
-base_url = 'https://downloads.openwrt.org/snapshots'
+base_url = 'http://downloads.openwrt.org/snapshots'
 out_dir = '/data/mirrors/openwrt/snapshots'
 
 def download(filename, last_modified):

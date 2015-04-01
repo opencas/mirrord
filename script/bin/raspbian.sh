@@ -12,7 +12,7 @@ fatal() {
 warn() {
   echo "$1"
 }
-rsync --archive --verbose --delete --delete-delay --delay-updates \
+rsync --ipv4 --archive --verbose  --delete-delay --delay-updates \
     archive.raspbian.org::archive /data/mirrors/raspbian
 
 

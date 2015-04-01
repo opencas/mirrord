@@ -25,14 +25,14 @@ if ! stty &>/dev/null; then
     QUIET="-q"
 fi
 
-rsync -rtlvH --safe-links --delete-delay --progress -h ${QUIET} --timeout=600 --contimeout=60 -p \
+rsync -rtlvH --ipv4  --safe-links --delete-delay --progress -h ${QUIET} --timeout=600 --contimeout=60 -p \
 	--delay-updates --no-motd --bwlimit=$bwlimit \
 	--temp-dir="${tmp}" \
 	--exclude='*.links.tar.gz*' \
 	--exclude='/other' \
 	--exclude='/sources' \
-	--exclude='/iso' \
 	${source} \
 	"${target}"
 
-#echo "Last sync was $(date -d @$(cat ${target}/lastsync))"
+echo "Last sync was $(date -d @$(cat ${target}/lastsync))"
+rm -f $lock

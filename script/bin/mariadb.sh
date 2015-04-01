@@ -12,7 +12,7 @@ fatal() {
 warn() {
   echo "$1"
 }
-rsync -a --partial --delete-delay --delay-updates rsync.osuosl.org::mariadb /data/mirrors/mariadb
+rsync -a --ipv4 --partial --delete-delay --delay-updates rsync.osuosl.org::mariadb /data/mirrors/mariadb
 
 
 rm -f $LOCK
