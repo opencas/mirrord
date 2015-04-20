@@ -12,7 +12,7 @@ fatal() {
 warn() {
   echo "$1"
 }
-rsync -av --ipv4 --delete-delay packages.linuxdeepin.com::packages /data/mirrors/deepin
-rsync -av --ipv4 --delete-delay cdimage.linuxdeepin.com::releases /data/mirrors/deepin-cd
+rsync -av --timeout=600 --ipv4 --delete-delay packages.linuxdeepin.com::packages /data/mirrors/deepin
+rsync -av --timeout=600 --ipv4 --delete-delay cdimage.linuxdeepin.com::releases /data/mirrors/deepin-cd
 
 rm -f $LOCK

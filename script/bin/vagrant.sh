@@ -1,5 +1,5 @@
 #/bin/dash
-LOCK=/tmp/epel
+LOCK=/tmp/vagrant
 
 [ -f $LOCK ] && exit 0
 touch $LOCK
@@ -12,10 +12,10 @@ fatal() {
 warn() {
   echo "$1"
 }
-SOURCE=rsync://dl.fedoraproject.org/fedora-epel
-rsync -vazH --timeout=600 --ipv4 --numeric-ids  --delay-updates --delete-delay \
-   $SOURCE /data/mirrors/epel
+SOURCE=rsync://cloud-images.ubuntu.com/cloud-images/vagrant
 
-/usr/local/bin/report_mirror > /dev/null
+rsync -vazH --timeout=600 --ipv4 --numeric-ids  --delay-updates --delete-delay \
+   $SOURCE /data/mirrors/ubuntu-vagrant
+
 
 rm -f $LOCK

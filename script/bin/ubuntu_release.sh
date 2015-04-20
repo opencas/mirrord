@@ -25,7 +25,7 @@ if [ ! -d ${BASEDIR} ]; then
   mkdir -p ${BASEDIR} || fatal "Creation of ${BASEDIR} failed."
 fi
 
-rsync --ipv4 --verbose --recursive --times --links --hard-links \
+rsync --timeout=600 --ipv4 --verbose --recursive --times --links --hard-links \
   --stats --delete-after \
   ${RSYNCSOURCE} ${BASEDIR} || fatal "Failed to rsync from ${RSYNCSOURCE}."
 

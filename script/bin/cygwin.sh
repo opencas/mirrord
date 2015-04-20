@@ -12,7 +12,7 @@ fatal() {
 warn() {
   echo "$1"
 }
-rsync -avzH --ipv4 --delay-updates  --delete-delay \
+rsync -avzH --ipv4 --timeout=600 --delay-updates  --delete-delay \
     rsync://mirrors.kernel.org/sourceware/cygwin/  /data/mirrors/cygwin
 
 

@@ -70,7 +70,7 @@ header ='''
     <!-- begin header -->
     <header id="header" class="container clearfix">
         <!-- begin logo -->
-        <h1 id="logo"><a href="index.html"><img width="290" height="90" src="images/opencaslogo.png" alt="Exquiso"></a></h1>
+        <h1 id="logo"><a href="index.html"><img width="290" height="90" src="images/opencaslogo.png" alt="OpenCAS"></a></h1>
         <!-- end logo -->
         
         <!-- begin navigation wrapper -->
@@ -540,7 +540,7 @@ def GetCurPathInfo():
             if Name in last_modify_file_dict:
                 tempInfo = os.stat(CurPath+"/"+Name + last_modify_file_dict[Name])
             #tempDict = dict( [('Size', tempInfo.st_size),('CreateTime',time.ctime(tempInfo.st_ctime)),('Help','http://wiki.opencas.org/'+Name),('Link','http://mirrors.opencas.cn/'+Name)])  
-            tempDict = dict( [('CreateTime',time.ctime(tempInfo.st_mtime)),('Help','http://www.opencas.cn/'),('Link','http://mirrors.opencas.cn/'+Name)])
+            tempDict = dict( [('CreateTime',time.ctime(tempInfo.st_ctime)),('Help','http://www.opencas.cn/'),('Link','http://mirrors.opencas.cn/'+Name)])
             InfoDict[Name] = tempDict  
     return InfoDict
 

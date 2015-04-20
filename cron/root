@@ -13,6 +13,6 @@ MAILTO="admin@opencas.cn"
 10  1   *   *   * rsync -rtlzv --ipv4 --delete-delay --delay-updates cran.r-project.org::CRAN /data/mirrors/cran > /dev/null
 20  1   *   *   * rsync -avz --ipv4 --delete-delay --delay-updates --safe-links rsync.apache.org::apache-dist /data/mirrors/apache > /dev/null
 40  1   *   *   * /usr/local/bin/ubuntu_release.sh > /dev/null
-10  2,8,14,20 *   *   * /usr/local/bin/centos.sh
+10  2,8,14,20 *   *   * /usr/local/bin/centos.sh > /dev/null
 10  5,19 *   *   * /usr/local/bin/mariadb.sh > /dev/null
 40  0,6,12,18 *   *   * /usr/local/bin/epel.sh > /dev/null
