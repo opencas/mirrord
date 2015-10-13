@@ -66,5 +66,5 @@ def fetch(file):
                process(base_dir + element.text)
          else:
             fetch(element.text)
-for file in ['repository-8.xml', 'repository-7.xml', 'repository-6.xml', 'repository-5.xml', 'repository-10.xml', 'addons_list-2.xml', 'addons_list-1.xml']:
+for file in ['repository-10.xml', 'addons_list-2.xml']:
    fetch(file)
