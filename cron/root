@@ -2,18 +2,23 @@ HELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO="admin@opencas.cn"
 
-20  6   *   *   * /data/website/HtmlGen.py
+*/2  *   *   *   * /usr/bin/python /data/site/public/genState.py
 5   *   *   *   * /usr/local/bin/pypi.sh > /dev/null
 10   2   *   *   * /usr/local/bin/android.py > /dev/null
 0   2   *   *   * /usr/local/bin/archlinux.sh > /dev/null
 0   3   *   *   * /usr/local/bin/eclipse.sh > /dev/null
 0   1   *   *   * /usr/local/bin/raspbian.sh > /dev/null
 20  0   *   *   * /usr/local/bin/deepin.sh > /dev/null
-20  2   *   *   * /usr/local/bin/cygwin.sh > /dev/null
+30  0   *   *   * /usr/local/bin/deepin-cd.sh > /dev/null
+40  11,23   *   *   * /usr/local/bin/cygwin.sh > /dev/null
 0   4   *   *   * /usr/local/bin/gnu.sh > /dev/null
-10  1   *   *   * rsync -rtlzv --ipv4 --delete-delay --delay-updates cran.r-project.org::CRAN /data/mirrors/cran > /dev/null
-20  1   *   *   * rsync -avz --ipv4 --delete-delay --delay-updates --safe-links rsync.apache.org::apache-dist /data/mirrors/apache > /dev/null
-40  1   *   *   * /usr/local/bin/ubuntu_release.sh > /dev/null
+10  1   *   *   * /usr/local/bin/cran.sh > /dev/null
+30  5   *   *   * /usr/local/bin/ctan.sh > /dev/null
+20  1   *   *   * /usr/local/bin/apache.sh > /dev/null
+0   1,5,9,13,17,21   *   *   * /usr/local/bin/gentoo.sh > /dev/null
+0   0,4,8,12,16,20   *   *   * /usr/local/bin/ubuntu_release.sh > /dev/null
+30  3,9,15,21   *   *   * /usr/local/bin/ubuntu.sh > /dev/null
+0   5   *   *   * /usr/local/bin/ubuntu-vagrant.sh > /dev/null
 10  2,8,14,20 *   *   * /usr/local/bin/centos.sh > /dev/null
 10  5,19 *   *   * /usr/local/bin/mariadb.sh > /dev/null
 40  0,6,12,18 *   *   * /usr/local/bin/epel.sh > /dev/null

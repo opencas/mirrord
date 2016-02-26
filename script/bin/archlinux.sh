@@ -3,7 +3,7 @@
 home="/data/mirrors"
 target="${home}/archlinux"
 tmp="${home}/archlinux/.tmp"
-lock='/tmp/mirrorsync.lck'
+lock='/tmp/archlinux'
 bwlimit=4096
 #source='rsync://rsync.archlinux.org/ftp_tier1'
 #lastupdate_url="http://rsync.archlinux.org/lastupdate"

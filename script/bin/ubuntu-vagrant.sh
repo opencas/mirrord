@@ -1,5 +1,5 @@
 #/bin/dash
-LOCK=/tmp/vagrant
+LOCK=/tmp/ubuntu-vagrant
 
 [ -f $LOCK ] && exit 0
 touch $LOCK
