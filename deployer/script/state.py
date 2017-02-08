@@ -34,7 +34,7 @@ def getState():
             else:
                 temp['state'] = 'success'
 
-            temp["doc"] = 'http://mirrors.opencas.org/docs/' + mirror
+            temp["doc"] = 'http://mirrors.opencas.org/docs/' + mirror + '.html'
             info = os.stat(mirrorPath + os.path.sep + mirror)
             if mirror in last_modify:
                 info = os.stat(mirrorPath + os.path.sep +
