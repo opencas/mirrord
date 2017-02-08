@@ -1,5 +1,5 @@
 #/bin/dash
-source=rsync://repo.archlinuxcn.org
+source=rsync://repo@sync.repo.archlinuxcn.org/repo/
 target=/data/mirrors/archlinuxcn
 lock=/tmp/archlinuxcn
 
