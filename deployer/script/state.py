@@ -15,7 +15,8 @@ def getSize(dir):
 
 
 def getState():
-    mirrorList = os.listdir(mirrorPath).sort()
+    mirrorList = os.listdir(mirrorPath)
+    mirrorList.sort()
     state = dict()
 
     last_modify = {
@@ -46,7 +47,7 @@ def getState():
 
 
 if __name__ == '__main__':
-    state = sorted(getState().iteritems(), key=lambda d: d[0])
+    state = sorted(getState().items(), key=lambda d: d[0])
     content = json.dumps(state)
 
     with open(mirrorPath + 'state.json', 'w') as outFile:
