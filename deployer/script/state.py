@@ -21,6 +21,7 @@ def getState():
 
     last_modify = {
         'centos': '/timestamp.txt',
+        'openthos': '/timestamp.txt',
         'android': '/repository',
         'epel': '/fullfilelist',
         'pypi': '/status'

@@ -16,12 +16,13 @@ warn() {
   echo "$1"
 }
 
+cd /data/mirrors/openthos
 latest=`curl -s -v -X HEAD $HOST 2>&1 | grep 'Last-Modified:' |  cut -d ':' -f2 | awk '{gsub(/^ +| +$/,"")}1'`
 last_modified=`cat $timestamp`
 
-if [ $latest != $last_modified ]; then
+if [ "$latest" != "$last_modified" ]; then
     curl $HOST -LO
-    latest > $timestamp
+    echo "$latest" > $timestamp
 fi
 
 rm -f $lock
