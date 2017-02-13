@@ -1,4 +1,4 @@
-#/bin/dash
+#/bin/bash
 LOCK=/tmp/raspbian
 
 [ -f $LOCK ] && exit 0

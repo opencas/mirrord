@@ -1,4 +1,4 @@
-#/bin/dash
+#/bin/bash
 LOCK=/tmp/epel
 
 [ -f $LOCK ] && exit 0
